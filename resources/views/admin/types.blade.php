@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-   <div class="card">
+    <div class="card">
         <div class="card-body">
             <table class="table">
                 <thead>
@@ -24,5 +24,5 @@
                 </tbody>
             </table>
         </div>
-   </div>
+    </div>
 @endsection

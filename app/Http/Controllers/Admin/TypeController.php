@@ -20,4 +20,5 @@ class TypeController extends Controller
         return view('admin.types', compact('types', 'projects'));
     }
 
+
 }

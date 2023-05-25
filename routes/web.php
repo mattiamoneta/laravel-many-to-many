@@ -32,8 +32,8 @@ Route::middleware(['auth','verified'])
     })->name('dashboard');
 
     Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
-    Route::resource('types', TypeController::class)->only('index');
-    Route::resource('technologies', TechnologyController::class)->only('index');
+    Route::resource('types', TypeController::class);
+    Route::resource('technologies', TechnologyController::class);
 });
 
 Route::middleware('auth')
