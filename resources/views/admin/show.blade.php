@@ -1,32 +1,45 @@
 @extends('layouts.admin')
 
 @section('page-name')
-    {{ $project->name }}
+    Details
 @endsection
 
 @section('content')
-    <div class="row justify-content-center">
-        <div class="col">
+
+    <div class="row my-5">
+        <div class="col-9 mx-auto">
             <div class="card">
-                <div class="card-body">
-                    <div class="type">
-                        <span class="text-uppercase fw-bold small">PROJECT TYPE:</span>
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card-body">
+                            <h2>{{$project->name}}</h2>
+                            <p class="mb-5">{{$project->description}}</p>
 
-                        <span class="badge text-bg-secondary">
-                            {{ $project->type ? $project->type->name : '' }}
-                        </span>
+                           
+                        </div>
                     </div>
-                    <div class="technologies">
-                        <span class="text-uppercase fw-bold small">TECHNOLOGIES:</span>
-
-                        @foreach ($project->technologies as $tech)
-                            <span class="badge text-bg-secondary">
-                                {{ $tech->name }}
-                            </span>
-                        @endforeach
+                    <div class="col-4">
+                        <img src="{{$project->thumb}}" class="card-img-top" alt="...">
                     </div>
-                    <div class="description mt-4">
-                        {{ $project->description }}
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="row py-3">
+                                <div class="col-3">
+                                    <h6 class="text-uppercase fw-bold small">PROJECT TYPE</h6>
+                                    <span>{{ $project->type ? $project->type->name : '-' }}</span>
+                                </div>
+                                <div class="col-9">
+                                    <h6 class="text-uppercase fw-bold small">PROJECT TECHNOLOGIES</h6>
+                                    @foreach ($project->technologies as $tech)
+                                    <span class="badge text-bg-secondary">
+                                        {{ $tech->name }}
+                                    </span>
+                                @endforeach
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

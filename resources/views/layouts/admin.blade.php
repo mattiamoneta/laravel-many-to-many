@@ -34,7 +34,7 @@
                     @include('layouts.partials.sidebar')
                 </div>
                 {{-- End Sidebar --}}
-                <div class="col-10">
+                <div class="col-10 vh-100 overflow-auto">
                     {{-- Navbar --}}
                     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
                         <div class="container-fluid">
@@ -92,13 +92,14 @@
                     </nav>
                     {{-- End Navbar --}}
 
-                    <main class="">
+                    <main>
                         <div class="container-fluid p-5">
-                            <h2 class="fs-2 text-secondary mb-4">
-                                @yield('page-name')
-                            </h2>
+                                <h2 class="display-4 text-secondary mb-4">
+                                    @yield('page-name')
+                                </h2>
 
-                            @yield('content')
+                                @yield('content')
+       
                         </div>
 
                     </main>

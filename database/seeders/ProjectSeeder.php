@@ -23,7 +23,7 @@ class ProjectSeeder extends Seeder
             $newProject = new Project();
             $newProject->name = $itemTitle;
             $newProject->description = $faker->sentence(5);
-            $newProject->thumb = $faker->text(30);
+            $newProject->thumb = "https://picsum.photos/200";
             $newProject->slug = Project::assignSlug($itemTitle);
             $newProject->save();
         }

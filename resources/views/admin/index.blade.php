@@ -6,57 +6,34 @@
 
 @section('content')
     <div class="row justify-content-center">
-        <div class="col">
-            <div class="card">
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Thumbnail</th>
-                                <th scope="col">Type</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
 
-                            @foreach ($projects as $project)
-                                <tr>
-                                    <th scope="row">{{ $project->id }}</th>
-                                    <td>{{ $project->name }}</td>
-                                    <td>{{ $project->description }}</td>
-                                    <td>{{ $project->thumb }}</td>
+        @foreach ($projects as $project)
+            <div class="col-3">
+                <div class="card my-5 text-center" style="width: 18rem;">
+                    <img src="{{ $project->thumb }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $project->name }}</h5>
+                        <p class="card-text">{{ $project->description }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="post">
+                            <a class="btn btn-dark btn-sm rounded-4 px-3"
+                                href="{{ route('admin.projects.show', $project->slug) }}"><i
+                                    class="fa-solid fa-magnifying-glass me-2"></i>Show</a>
+                            <a class="btn btn-dark btn-sm rounded-4 px-3"
+                                href="{{ route('admin.projects.edit', $project) }}"><i
+                                    class="fa-solid fa-file-pen me-2"></i>Edit</a>
 
-                                    <td>
-                                        {{ $project->type ? $project->type->name : '-' }}
-
-                                    </td>
-
-                                    <td>
-                                        <form action="{{ route('admin.projects.destroy', $project->id) }}" method="post">
-                                            <a class="btn btn-primary"
-                                                href="{{ route('admin.projects.show', $project->slug) }}"><i
-                                                    class="fa-solid fa-info"></i></a>
-                                            <a class="btn btn-primary"
-                                                href="{{ route('admin.projects.edit', $project) }}"><i
-                                                    class="fa-solid fa-file-pen"></i></a>
-
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger"
-                                                onclick="return confirm('Are you sure to delete?');"><i
-                                                    class="fa-solid fa-trash-can"></i></button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-
-                        </tbody>
-                    </table>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger btn-sm rounded-4"
+                                onclick="return confirm('Are you sure to delete?');"><i
+                                    class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endforeach
+
     </div>
 @endsection
