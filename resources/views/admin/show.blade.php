@@ -4,22 +4,24 @@
     Details
 @endsection
 
-@section('content')
 
+
+@section('content')
+    @include('layouts.partials.alert')
     <div class="row my-5">
         <div class="col-9 mx-auto">
             <div class="card">
                 <div class="row">
                     <div class="col-8">
-                        <div class="card-body">
-                            <h2>{{$project->name}}</h2>
-                            <p class="mb-5">{{$project->description}}</p>
+                        <div class="card-body py-4">
+                            <h2>{{ $project->name }}</h2>
+                            <p class="mb-5">{{ $project->description }}</p>
 
-                           
+
                         </div>
                     </div>
                     <div class="col-4">
-                        <img src="{{$project->thumb}}" class="card-img-top" alt="...">
+                        <img src="{{ $project->thumb }}" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="card-footer">
@@ -33,10 +35,10 @@
                                 <div class="col-9">
                                     <h6 class="text-uppercase fw-bold small">PROJECT TECHNOLOGIES</h6>
                                     @foreach ($project->technologies as $tech)
-                                    <span class="badge text-bg-secondary">
-                                        {{ $tech->name }}
-                                    </span>
-                                @endforeach
+                                        <span class="badge text-bg-secondary">
+                                            {{ $tech->name }}
+                                        </span>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

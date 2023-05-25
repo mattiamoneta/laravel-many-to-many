@@ -63,7 +63,7 @@ class ProjectController extends Controller
 
 
      
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('retMsg', 'Progetto creato correttamente!');
     }
 
     /**
@@ -112,7 +112,7 @@ class ProjectController extends Controller
             $project->technologies()->sync($request->technologies);
         }
 
-        return redirect()->route('admin.projects.show', $project->slug);
+        return redirect()->route('admin.projects.show', $project->slug)->with('retMsg', 'Progetto modificato correttamente!');
     }
 
     /**
@@ -126,6 +126,6 @@ class ProjectController extends Controller
         $data = Project::findOrFail($id);
         $data->delete();
 
-        return redirect()->route('admin.projects.index');
+        return redirect()->route('admin.projects.index')->with('retMsg', 'Elemento eliminato con successo');
     }
 }

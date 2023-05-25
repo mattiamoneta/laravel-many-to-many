@@ -4,9 +4,10 @@
     Portfolio
 @endsection
 
+
 @section('content')
     <div class="row justify-content-center">
-
+        @include('layouts.partials.alert')
         @foreach ($projects as $project)
             <div class="col-3">
                 <div class="card my-5 text-center" style="width: 18rem;">
