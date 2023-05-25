@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Boolfolio') }}</title>
 
 
     <!-- Fonts -->
@@ -94,12 +94,12 @@
 
                     <main>
                         <div class="container-fluid p-5">
-                                <h2 class="display-4 text-secondary mb-4">
-                                    @yield('page-name')
-                                </h2>
+                            <h2 class="display-4 text-secondary mb-4">
+                                @yield('page-name')
+                            </h2>
 
-                                @yield('content')
-       
+                            @yield('content')
+
                         </div>
 
                     </main>
