@@ -15,22 +15,14 @@ use App\Models\Technology;
 
 class ProjectController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $projects = Project::all();
         return view('admin.index', compact('projects'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         $types = Type::all();
@@ -38,23 +30,23 @@ class ProjectController extends Controller
         return view('admin.create', compact('types','technologies'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(ProjectRequest $request)
     {
         $data = $request->validated();
-        $data['slug'] = Project::assignSlug($request->nameField);
 
         $newProject = new Project();
-        $newProject->name = $data['nameField'];
-        $newProject->description = $data['descriptionField'];
-        $newProject->thumb = $data['thumbField'];
-        $newProject->slug = Project::assignSlug($data['nameField']);
-        $newProject->type_id = $data['typeField'];
+        $newProject->name = $data['name'];
+        $newProject->description = $data['description'];
+        $newProject->thumb = $data['thumb'];
+        $newProject->slug = Project::assignSlug($data['name']);
+
+        $validSlug = Project::where('slug', Project::assignSlug($data['name']))->where('id', '<>', $newProject->id)->first();
+
+        if ($validSlug) {
+            return back()->withInput()->withErrors(['name' => 'ERRORE: Slug già utilizzato.']);
+        }
+
+        $newProject->type_id = $data['type'];
         $newProject->save();
 
         if($request->has('technologies')){
@@ -66,23 +58,13 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.index')->with('retMsg', 'Progetto creato correttamente!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Project $project)
     {
         return view('admin.show', compact('project'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Project $project)
     {
         $types = Type::all();
@@ -90,22 +72,24 @@ class ProjectController extends Controller
         return view('admin.edit', compact('project','types','technologies'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(ProjectRequest $request, Project $project)
     {
         $data = $request->validated();
 
-        $project->name = $data['nameField'];
-        $project->description = $data['descriptionField'];
-        $project->thumb = $data['thumbField'];
-        $project->slug = Project::assignSlug($data['nameField']);
-        $project->type_id = $data['typeField'];
+        $project->name = $data['name'];
+        $project->description = $data['description'];
+        $project->thumb = $data['thumb'];
+        $project->slug = Project::assignSlug($data['name']);
+ 
+
+        $validSlug = Project::where('slug', Project::assignSlug($data['name']))->where('id', '<>', $project->id)->first();
+
+        if ($validSlug) {
+            return back()->withInput()->withErrors(['name' => 'ERRORE: Slug già utilizzato.']);
+        }
+
+     
+        $project->type_id = $data['type'];
         $project->save();
 
         if($request->has('technologies')){
@@ -115,12 +99,7 @@ class ProjectController extends Controller
         return redirect()->route('admin.projects.show', $project->slug)->with('retMsg', 'Progetto modificato correttamente!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
         $data = Project::findOrFail($id);

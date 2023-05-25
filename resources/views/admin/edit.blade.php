@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('page-name')
-    Add New Project
+    Edit
 @endsection
 
 @section('content')
@@ -17,27 +17,27 @@
 
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="nameField" class="form-label fw-bold small">Project Name</label>
+                                <label for="name" class="form-label fw-bold small">Project Name</label>
                                 <input type="text"
-                                    class="form-control @error('nameField')
+                                    class="form-control @error('name')
                             is-invalid
                         @enderror"
-                                    id="nameField" name="nameField" value="{{ old('nameField', $project->name) }}">
-                                @error('nameField')
+                                    id="name" name="name" value="{{ old('name', $project->name) }}">
+                                @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="descriptionField" class="form-label fw-bold small">Description</label>
+                                <label for="description" class="form-label fw-bold small">Description</label>
                                 <input type="text"
-                                    class="form-control @error('descriptionField')
+                                    class="form-control @error('description')
                             is-invalid
                         @enderror"
-                                    id="descriptionField" name="descriptionField"
-                                    value="{{ old('descriptionField', $project->description) }}">
-                                @error('descriptionField')
+                                    id="description" name="description"
+                                    value="{{ old('description', $project->description) }}">
+                                @error('description')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -48,32 +48,32 @@
 
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="thumbField" class="form-label fw-bold small">Thumbnail URL</label>
+                                <label for="thumb" class="form-label fw-bold small">Thumbnail URL</label>
                                 <input type="text"
-                                    class="form-control @error('thumbField')
+                                    class="form-control @error('thumb')
                                 is-invalid
                             @enderror"
-                                    id="thumbField" name="thumbField" value="{{ old('thumbField', $project->thumb) }}">
-                                @error('thumbField')
+                                    id="thumb" name="thumb" value="{{ old('thumb', $project->thumb) }}">
+                                @error('thumb')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                             <div class="col">
-                                <label for="typeField" class="form-label fw-bold small">Project Type</label>
+                                <label for="type" class="form-label fw-bold small">Project Type</label>
                                 <select
-                                    class="form-select @error('typeField')
+                                    class="form-select @error('type')
                                 is-invalid
                             @enderror"
-                                    name="typeField" aria-label="Default select example">
+                                    name="type" aria-label="Default select example">
                                     @foreach ($types as $type)
                                         <option @selected(old('type_id', $project->type_id) == '') value="{{ $type->id }}">{{ $type->name }}
                                         </option>
                                     @endforeach
                                 </select>
 
-                                @error('typeField')
+                                @error('type')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -95,7 +95,7 @@
                                                 @if ($errors->any())
                                                     <input type="checkbox" id="tech_{{ $techItem->id }}"
                                                         name="technologies[]" value="{{ $techItem->id }}"
-                                                        @if (in_array($technologies->id, old('technologies', []))) checked @endif>
+                                                        @if (in_array($techItem->id, old('technologies', []))) checked @endif>
                                                 @else
                                                     <input type="checkbox" id="tech_{{ $techItem->id }}"
                                                         name="technologies[]" value="{{ $techItem->id }}"

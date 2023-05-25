@@ -25,10 +25,10 @@ class ProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'nameField' => 'required|max:200',
-            'descriptionField' => 'required|max:200',
-            'thumbField' => 'required|max:80',
-            'typeField' => 'required|exists:types,id',
+            'name' => 'required|max:200|unique:projects',
+            'description' => 'required|max:200',
+            'thumb' => 'required|max:80',
+            'type' => 'required|exists:types,id',
             'technologies' => 'exists:technologies,id'
         ];
     }
@@ -36,11 +36,11 @@ class ProjectRequest extends FormRequest
 
     public function messages(){
         return[
-            'nameField.required' => 'Il campo Project Name non può essere vuoto',
-            'descriptionField.required' => 'Il Description non può essere vuoto',
-            'thumbField.required' => 'Il campo Thumbnail non può essere vuoto',
-            'typeField.required' => 'Il campo Project Type non può essere vuoto',
-            'typeField.exists:types' => 'Il campo Project Type non è corretto'
+            'name.required' => 'Il campo Project Name non può essere vuoto',
+            'description.required' => 'Il Description non può essere vuoto',
+            'thumb.required' => 'Il campo Thumbnail non può essere vuoto',
+            'type.required' => 'Il campo Project Type non può essere vuoto',
+            'type.exists:types' => 'Il campo Project Type non è corretto'
         ];
     }
 

@@ -14,6 +14,7 @@ class Project extends Model
         'name',
         'description',
         'thumb',
+        'slug'
     ];
 
     public static function assignSlug(string $title){
