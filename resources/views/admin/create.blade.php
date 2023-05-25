@@ -76,6 +76,14 @@
 
                         </div>
 
+                        <div class="mb-3">
+                            @foreach ($technologies as $techItem)
+                                <input type="checkbox" id="tech_{{ $techItem->id }}" name="technologies[]"
+                                    value="{{ $techItem->id }}">
+                                <label for="tech_{{ $techItem->id }}">{{ $techItem->name }}</label><br>
+                            @endforeach
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>

@@ -16,6 +16,15 @@
                             {{ $project->type ? $project->type->name : '' }}
                         </span>
                     </div>
+                    <div class="technologies">
+                        <span class="text-uppercase fw-bold small">TECHNOLOGIES:</span>
+
+                        @foreach ($project->technologies as $tech)
+                            <span class="badge text-bg-secondary">
+                                {{ $tech->name }}
+                            </span>
+                        @endforeach
+                    </div>
                     <div class="description mt-4">
                         {{ $project->description }}
                     </div>

@@ -67,7 +67,7 @@
                         @enderror"
                                 name="typeField" aria-label="Default select example">
                                 @foreach ($types as $type)
-                                    <option @selected(old('type_id', $project->type_id) == "") value="{{ $type->id }}">{{ $type->name }}
+                                    <option @selected(old('type_id', $project->type_id) == '') value="{{ $type->id }}">{{ $type->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -79,6 +79,28 @@
                             @enderror
 
                         </div>
+
+
+
+                        <div class="mb-3">
+                            @foreach ($technologies as $techItem)
+                                @if ($errors->any())
+                                    <input type="checkbox" id="tech_{{ $techItem->id }}" name="technologies[]"
+                                        value="{{ $techItem->id }}" @if (in_array($technologies->id, old('technologies', []))) checked @endif>
+                                @else
+                                    <input type="checkbox" id="tech_{{ $techItem->id }}" name="technologies[]"
+                                        value="{{ $techItem->id }}" @if ($project->technologies->contains($techItem->id)) checked @endif>
+                                @endif
+
+                                <label for="tech_{{ $techItem->id }}">{{ $techItem->name }}</label><br>
+                            @endforeach
+                        </div>
+                        @error('technologies')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>
                 </div>

@@ -28,7 +28,8 @@ class ProjectRequest extends FormRequest
             'nameField' => 'required|max:200',
             'descriptionField' => 'required|max:200',
             'thumbField' => 'required|max:80',
-            'typeField' => 'required|exists:types,id'
+            'typeField' => 'required|exists:types,id',
+            'technologies' => 'exists:technologies,id'
         ];
     }
 

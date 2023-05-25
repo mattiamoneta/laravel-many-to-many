@@ -11,6 +11,7 @@ use App\Http\Requests\ProjectRequest;
 #Models
 use App\Models\Project;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -33,7 +34,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('admin.create', compact('types'));
+        $technologies = Technology::all();
+        return view('admin.create', compact('types','technologies'));
     }
 
     /**
@@ -53,11 +55,14 @@ class ProjectController extends Controller
         $newProject->thumb = $data['thumbField'];
         $newProject->slug = Project::assignSlug($data['nameField']);
         $newProject->type_id = $data['typeField'];
-
         $newProject->save();
 
-        // $newProject = Project::create($data);
+        if($request->has('technologies')){
+            $newProject->technologies()->attach($request->technologies);
+        }
 
+
+     
         return redirect()->route('admin.projects.index');
     }
 
@@ -69,8 +74,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $types = Type::all();
-        return view('admin.show', compact('project','types'));
+        return view('admin.show', compact('project'));
     }
 
     /**
@@ -82,7 +86,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.edit', compact('project','types'));
+        $technologies = Technology::all();
+        return view('admin.edit', compact('project','types','technologies'));
     }
 
     /**
@@ -102,6 +107,10 @@ class ProjectController extends Controller
         $project->slug = Project::assignSlug($data['nameField']);
         $project->type_id = $data['typeField'];
         $project->save();
+
+        if($request->has('technologies')){
+            $project->technologies()->sync($request->technologies);
+        }
 
         return redirect()->route('admin.projects.show', $project->slug);
     }
