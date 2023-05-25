@@ -6,6 +6,8 @@ use App\Models\Technology;
 use App\Http\Requests\StoreTechnologyRequest;
 use App\Http\Requests\UpdateTechnologyRequest;
 
+use App\Models\Project;
+
 class TechnologyController extends Controller
 {
     /**
@@ -15,7 +17,9 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        //
+        $technologies = Technology::all();
+        $projects = Project::all();
+        return view('admin.technologies', compact('projects','technologies'));
     }
 
     /**

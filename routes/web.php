@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 #Custom controllers
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\TechnologyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::middleware(['auth','verified'])
 
     Route::resource('projects', ProjectController::class)->parameters(['projects' => 'project:slug']);
     Route::resource('types', TypeController::class)->only('index');
+    Route::resource('technologies', TechnologyController::class)->only('index');
 });
 
 Route::middleware('auth')

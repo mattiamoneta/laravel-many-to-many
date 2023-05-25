@@ -32,6 +32,22 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('admin.types.index') }}" class="nav-link link-body-emphasis">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"></use>ç
+                    </svg>
+                    Types
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('admin.technologies.index') }}" class="nav-link link-body-emphasis">
+                    <svg class="bi pe-none me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"></use>ç
+                    </svg>
+                    Technologies
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('admin.projects.create') }}" class="nav-link link-body-emphasis">
                     <svg class="bi pe-none me-2" width="16" height="16">
                         <use xlink:href="#speedometer2"></use>
