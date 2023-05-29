@@ -27,7 +27,7 @@ class ProjectRequest extends FormRequest
         return [
             'name' => 'required|max:200|unique:projects',
             'description' => 'required|max:200',
-            'thumb' => 'required|max:80',
+            'thumb' => 'required|image|max:1024',
             'type' => 'required|exists:types,id',
             'technologies' => 'exists:technologies,id'
         ];

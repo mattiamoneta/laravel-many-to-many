@@ -48,8 +48,8 @@
 
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="thumb" class="form-label fw-bold small">Thumbnail URL</label>
-                                <input type="text"
+                                <label for="thumb" class="form-label fw-bold small">Cover Image</label>
+                                <input type="file"
                                     class="form-control @error('thumb')
                                 is-invalid
                             @enderror"

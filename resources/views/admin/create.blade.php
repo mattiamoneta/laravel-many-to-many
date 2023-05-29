@@ -9,7 +9,7 @@
         <div class="col">
             <div class="card bg-light">
                 <div class="card-body">
-                    <form method="post" action="{{ route('admin.projects.store') }}">
+                    <form method="post" action="{{ route('admin.projects.store') }}" enctype="multipart/form-data">
 
                         @csrf
 
@@ -46,8 +46,8 @@
 
                         <div class="row mb-3">
                             <div class="col">
-                                <label for="thumb" class="form-label fw-bold small">Thumbnail URL</label>
-                                <input type="text"
+                                <label for="thumb" class="form-label fw-bold small">Cover Image</label>
+                                <input type="file"
                                     class="form-control @error('thumb')
                             is-invalid
                         @enderror"

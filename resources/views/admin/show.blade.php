@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <img src="{{ $project->thumb }}" class="card-img-top" alt="...">
+                        <img src="{{ asset('storage/' . $project->thumb) }}" class="card-img-top" alt="...">
                     </div>
                 </div>
                 <div class="card-footer">

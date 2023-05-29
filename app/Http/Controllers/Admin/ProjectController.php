@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 #Custom Request
 use App\Http\Requests\ProjectRequest;
@@ -37,7 +38,6 @@ class ProjectController extends Controller
         $newProject = new Project();
         $newProject->name = $data['name'];
         $newProject->description = $data['description'];
-        $newProject->thumb = $data['thumb'];
         $newProject->slug = Project::assignSlug($data['name']);
 
         $validSlug = Project::where('slug', Project::assignSlug($data['name']))->where('id', '<>', $newProject->id)->first();
@@ -47,6 +47,11 @@ class ProjectController extends Controller
         }
 
         $newProject->type_id = $data['type'];
+
+        $path = Storage::put('user_uploads', $data['thumb']);
+        $newProject->thumb = $path;
+
+
         $newProject->save();
 
         if($request->has('technologies')){
@@ -88,6 +93,18 @@ class ProjectController extends Controller
             return back()->withInput()->withErrors(['name' => 'ERRORE: Slug già utilizzato.']);
         }
 
+
+        if($request->hasFile('thumb')){
+
+            if($project->thumb){
+                Storage::delete($project->thumb);
+            }
+
+            Storage::put('user_uploads', $data['thumb']);
+            $project->thumb = $path;
+
+        }
+
      
         $project->type_id = $data['type'];
         $project->save();
@@ -102,8 +119,13 @@ class ProjectController extends Controller
 
     public function destroy($id)
     {
-        $data = Project::findOrFail($id);
-        $data->delete();
+        $project = Project::findOrFail($id);
+
+        if($project->thumb){
+            Storage::delete($project->thumb);
+        }
+
+        $project->delete();
 
         return redirect()->route('admin.projects.index')->with('retMsg', 'Elemento eliminato con successo');
     }
